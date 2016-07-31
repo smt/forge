@@ -1,0 +1,104 @@
+##
+# Proxy debug logger that logs when DEBUG flag is set to true
+#
+# Parameters:
+#   1. String to log
+##
+debug () {
+    if [ "$DEBUG" = true ] ; then
+        echo -e "${PURPLE} ~~~ [$PROJECT DEBUG] ${NO_COLOR}"$1
+    fi
+}
+
+##
+# Proxy error logger
+#
+# Parameters:
+#   1. String to log
+##
+error () {
+    echo -e "${RED} ~~~ [$PROJECT ERROR] ${NO_COLOR}"$1
+}
+
+##
+# List available forge tasks
+##
+list_tasks () {
+    echo ""
+    echo "    Forge Tasks: "
+    echo -e "${GREEN}"
+    for filepath in $FORGE_TASKS/*; do
+        t=`basename $filepath`
+        echo -e "        - $t"
+    done
+    echo -e "${NO_COLOR}"
+}
+
+##
+# Proxy logger
+#
+# Parameters:
+#   1. String to log
+##
+log () {
+    echo -e "${CYAN} ~~~ [$PROJECT] ${NO_COLOR}"$1
+}
+
+##
+# Run a forge task. Task will be invoked with
+# the given cmd line options.
+#
+# Parameters:
+#   1. Task to run
+##
+run_task () {
+    log "Starting $1"
+
+    # is this a non-bash script?
+    # invoke the task in a sub-shell
+    if grep -Rq "/usr/bin/env" $FORGE_TASKS/$1; then
+        (exec $FORGE_TASKS/$1 $OPTIONS)
+    else
+        # source to allow forge api to be used
+        (source $FORGE_TASKS/$1 $OPTIONS)
+    fi
+
+    if [ $? -eq 0 ]; then
+        log "$1 Completed"
+    else
+        error "Aborting: Error when running task $1"
+        exit 1
+    fi
+}
+
+##
+# Show the usage for a specific task
+#
+# Parameters:
+#   1. Task to get usage for
+##
+task_usage () {
+    echo ""
+    echo -e "Usage:${GREEN}"
+    sed -e '/\#\!\/bin\/bash/,$d' $FORGE_TASKS/$1 | sed 's/\#/ /g'
+    echo -e "${NO_COLOR}"
+}
+
+##
+# forge usage
+##
+usage () {
+    echo ""
+    echo "Usage:"
+    echo -e "${GREEN}"
+    echo -e "    $0 [task] [-d]"
+    echo -e "    -d --debug     Enable debug mode"
+    echo -e "    -h --help      Show help"
+    echo -e "    -t --tasks     List all tasks"
+    echo -e "${NO_COLOR}"
+    echo "The desired task name must be the first arg."
+    echo "If no task is given, the default task will be used."
+    echo ""
+    echo "All options will be passed down to the invoked task."
+    echo ""
+}
