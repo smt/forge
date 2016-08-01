@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+/**
+@forge
+    Task:
+        sample-node-task
+
+    Purpose:
+        Sample Node task
+
+    Arguments:
+        None
+@forge
+**/
+
+console.log('Hello World');

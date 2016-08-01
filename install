@@ -1,0 +1,8 @@
+ln -sf ${pwd}/forge /usr/local/bin/forge
+
+read -p "Enter the target project directory to install forge (i.e. $HOME/Development/project): " PROJECT
+
+if [ -z $PROJECT ]; then
+    mkdir -p $PROJECT/.forge
+    cp -Rn tasks $PROJECT/.forge/
+fi

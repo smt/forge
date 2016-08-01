@@ -1,0 +1,16 @@
+#!/bin/bash
+
+: '
+@forge
+    Task:
+        sample-bash-task
+
+    Purpose:
+        Sample Bash task. Bash tasks can make use of the Forge api.
+
+    Arguments:
+        None
+@forge
+'
+
+log "Hello World"

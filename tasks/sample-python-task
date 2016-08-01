@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+'''
+@forge
+    Task:
+        sample-python-task
+
+    Purpose:
+        Sample Python task
+
+    Arguments:
+        None
+@forge
+'''
+
+print('Hello World')
