@@ -1,7 +1,7 @@
 ##
 # Proxy debug logger that logs when DEBUG flag is set to true
 #
-# Parameters:
+# Arguments:
 #   1. String to log
 ##
 debug () {
@@ -13,7 +13,7 @@ debug () {
 ##
 # Proxy error logger
 #
-# Parameters:
+# Arguments:
 #   1. String to log
 ##
 error () {
@@ -22,6 +22,9 @@ error () {
 
 ##
 # List available forge tasks
+#
+# Arguments:
+#   None
 ##
 list_tasks () {
     echo ""
@@ -37,7 +40,7 @@ list_tasks () {
 ##
 # Proxy logger
 #
-# Parameters:
+# Arguments:
 #   1. String to log
 ##
 log () {
@@ -48,7 +51,7 @@ log () {
 # Run a forge task. Task will be invoked with
 # the given cmd line options.
 #
-# Parameters:
+# Arguments:
 #   1. Task to run
 ##
 run_task () {
@@ -76,7 +79,7 @@ run_task () {
 # for multiline comments with @forge anotations
 # and printing the contents between them.
 #
-# Parameters:
+# Arguments:
 #   1. Task to get usage for
 ##
 task_usage () {
@@ -89,6 +92,9 @@ task_usage () {
 
 ##
 # forge usage
+#
+# Arguments:
+#   None
 ##
 usage () {
     echo ""
