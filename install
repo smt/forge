@@ -1,8 +1,12 @@
+# create global cmd (symlink)
 DIR=`dirname ${BASH_SOURCE[0]}`
 ln -sf $DIR/forge /usr/local/bin/forge
 
+# grab where to install forge from the user
 read -p "Enter the target project directory to install forge (i.e. $HOME/Development/project): " PROJECT
 
+# create .forge directory in project
+# and copy down base tasks
 if [ -n "$PROJECT" ]; then
     mkdir -p $PROJECT/.forge
     cp -Rn tasks $PROJECT/.forge/
