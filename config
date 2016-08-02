@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Paths
-PROJECT_ROOT=`pwd`
+PROJECT_ROOT=$(pwd)
 FORGE_ROOT=$PROJECT_ROOT/.forge
+FORGE_CACHE=$FORGE_ROOT/.cache
 FORGE_TASKS=$FORGE_ROOT/tasks
-FORGE_TMP=$FORGE_ROOT/.tmp
 
 # Colors
 BLACK='\033[0;30m'

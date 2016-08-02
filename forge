@@ -1,10 +1,9 @@
 #!/bin/bash
-set -o posix
-
 FORGE=`which forge`
 FULLPATH=`ls -l $FORGE | awk '{print $NF}'`
 ROOT=`dirname $FULLPATH`
 
+source $ROOT/find-project
 source $ROOT/config
 source $ROOT/utils
 source $ROOT/parse-args

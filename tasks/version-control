@@ -33,10 +33,10 @@ version_control () {
     debug "cmd: $@"
 
     # test .tmp directory exists
-    mkdir -p $FORGE_TMP
+    mkdir -p $FORGE_CACHE
 
     filename=`basename $filepath`
-    temp_file=$FORGE_TMP/$filename
+    temp_file=$FORGE_CACHE/$filename
 
     debug "filename: $filename"
     debug "temp_file: $temp_file"
@@ -71,7 +71,7 @@ enforce_version () {
 
     if [ $? -eq 0 ]; then
         debug "Caching $filepath"
-        cp -f $filepath $FORGE_TMP
+        cp -f $filepath $FORGE_CACHE
     else
         error "Aborting: Unable to cache and execute $@"
         exit 1
