@@ -1,5 +1,5 @@
 # create global cmd (symlink)
-DIR=`dirname ${BASH_SOURCE[0]}`
+DIR=$(dirname $0)
 ln -sf $DIR/forge /usr/local/bin/forge
 
 # grab where to install forge from the user

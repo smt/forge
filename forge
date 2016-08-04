@@ -1,7 +1,6 @@
 #!/bin/bash
-FORGE=`which forge`
-FULLPATH=`ls -l $FORGE | awk '{print $NF}'`
-ROOT=`dirname $FULLPATH`
+FULLPATH=$(ls -l $(which $0) | awk '{print $NF}')
+ROOT=$(dirname $FULLPATH)
 
 source $ROOT/find-project
 source $ROOT/config

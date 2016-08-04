@@ -31,7 +31,7 @@ list_tasks () {
     echo "    Forge Tasks: "
     echo -e "${GREEN}"
     for filepath in $FORGE_TASKS/*; do
-        t=`basename $filepath`
+        t=$(basename $filepath)
         echo -e "        - $t"
     done
     echo -e "${NO_COLOR}"

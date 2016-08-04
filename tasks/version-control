@@ -35,7 +35,7 @@ version_control () {
     # test .tmp directory exists
     mkdir -p $FORGE_CACHE
 
-    filename=`basename $filepath`
+    filename=$(basename $filepath)
     temp_file=$FORGE_CACHE/$filename
 
     debug "filename: $filename"
