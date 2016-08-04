@@ -1,18 +1,5 @@
 #!/usr/bin/env bash
 
-: '
-@forge
-    Task:
-        version-control
-
-    Purpose:
-        Enforces version control in the project
-
-    Arguments:
-        None
- @forge
-'
-
 ##
 # Enforce version control for a package manager in a project.
 #
