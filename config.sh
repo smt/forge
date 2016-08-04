@@ -16,5 +16,8 @@ readonly RED='\033[0;31m'
 readonly YELLOW='\033[0;33m'
 
 # Vars
-readonly DEBUG=false
 readonly PROJECT_NAME="Forge"
+
+# Mutables
+DEBUG=false
+PERF=false

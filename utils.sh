@@ -23,6 +23,36 @@ error () {
 }
 
 ##
+# Get a timestamp in milliseconds
+#
+# Arguments:
+#   None
+#
+# Returns:
+#   Current timestamp
+##
+get_time () {
+    if [[ is_mac_os ]]; then
+        python -c "import time; print int(round(time.time() * 1000))"
+    else
+        date +%s%3N
+    fi
+}
+
+##
+# Is the current OS MacOS?
+#
+# Arguments:
+#   None
+#   
+# Returns:
+#   True, if the current OS is MacOS; false, otherwise.
+##
+is_mac_os () {
+    [[ uname == "Darwin" ]]
+}
+
+##
 # List available forge tasks
 #
 # Arguments:
@@ -57,7 +87,11 @@ log () {
 #   1. Task to run
 ##
 run_task () {
-    log "Starting $1"
+    log "Starting $1..."
+
+    if [ "$PERF" = true ]; then
+        local start_time=$(get_time)
+    fi
 
     # is this a non-bash script?
     if grep -Rq "/usr/bin/env bash" $FORGE_TASKS/$1; then
@@ -68,8 +102,15 @@ run_task () {
         (exec $FORGE_TASKS/$1 $OPTIONS)
     fi
 
-    if [ $? -eq 0 ]; then
-        log "$1 Completed"
+    if [[ $? -eq 0 ]]; then
+        if [ "$PERF" = true ]; then
+            local end_time=$(get_time)
+            # log $start_time
+            # log $end_time
+            log "$1 completed in $((end_time-start_time)) ms"
+        else
+            log "$1 completed"
+        fi
     else
         error "Aborting: Error when running task $1"
         exit 1

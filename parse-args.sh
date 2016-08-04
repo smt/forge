@@ -10,7 +10,7 @@ parse_args () {
     for ((i = 1; i <= $#; i++)) ; do
         case ${!i} in
             -d | --debug)
-                readonly DEBUG=true
+                DEBUG=true
                 ;;
             -h | --help)
                 if [[ $TASK == "default" ]]; then
@@ -19,6 +19,9 @@ parse_args () {
                     task_usage $TASK
                 fi
                 exit
+                ;;
+            -p | --perf)
+                PERF=true
                 ;;
             -t | --tasks)
                 list_tasks
