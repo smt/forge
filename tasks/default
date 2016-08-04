@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
+
+# This is a sample default forge task.
+# It shows you how to run a Bash, Node, Python and Ruby tasks,
+# and how to keep Node, Python and Ruby dependencies up-to-date
+
+# sample run_task usage
 run_task "sample-bash-task"
 run_task "sample-node-task"
 run_task "sample-python-task"
 run_task "sample-ruby-task"
 
-version_control "$PROJECT_ROOT/package.json" "npm install"
-version_control "$PROJECT_ROOT/requirements.txt" "$PROJECT_ROOT/venv/bin/activate && pip install --disable-pip-version-check -r $PROJECT_ROOT/requirements.txt"
+# sample version_control usage
+# version_control "$PROJECT_ROOT/package.json" "npm install"
+# version_control "$PROJECT_ROOT/requirements.txt" "$PROJECT_ROOT/venv/bin/activate && pip install --disable-pip-version-check -r $PROJECT_ROOT/requirements.txt"
+# version_control "$PROJECT_ROOT/Gemfile" "gem install"

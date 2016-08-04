@@ -44,7 +44,7 @@ get_time () {
 #
 # Arguments:
 #   None
-#   
+#
 # Returns:
 #   True, if the current OS is MacOS; false, otherwise.
 ##
@@ -105,8 +105,6 @@ run_task () {
     if [[ $? -eq 0 ]]; then
         if [ "$PERF" = true ]; then
             local end_time=$(get_time)
-            # log $start_time
-            # log $end_time
             log "$1 completed in $((end_time-start_time)) ms"
         else
             log "$1 completed"
