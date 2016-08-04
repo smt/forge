@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # parse out task
 if [ "$#" -eq 0 ] || [[ ${1:0:1} == "-"  ]]; then
     TASK="default"

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 while [[ ! -d $(pwd)/.forge ]] && [[ $(pwd) != $HOME ]]; do
     cd ..
 done

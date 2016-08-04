@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 ##
 # Proxy debug logger that logs when DEBUG flag is set to true
 #
