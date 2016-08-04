@@ -77,6 +77,3 @@ enforce_version () {
         exit 1
     fi
 }
-
-version_control "$PROJECT_ROOT/package.json" "npm install"
-version_control "$PROJECT_ROOT/requirements.txt" "$PROJECT_ROOT/venv/bin/activate && pip install --disable-pip-version-check -r $PROJECT_ROOT/requirements.txt"
