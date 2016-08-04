@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 run_task "sample-bash-task"

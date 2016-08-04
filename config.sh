@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Paths
 PROJECT_ROOT=$(pwd)

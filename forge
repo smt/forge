@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 FULLPATH=$(ls -l $(which $0) | awk '{print $NF}')
 ROOT=$(dirname $FULLPATH)
 

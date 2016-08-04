@@ -58,12 +58,12 @@ run_task () {
     log "Starting $1"
 
     # is this a non-bash script?
-    # invoke the task in a sub-shell
-    if grep -Rq "/usr/bin/env" $FORGE_TASKS/$1; then
-        (exec $FORGE_TASKS/$1 $OPTIONS)
-    else
+    if grep -Rq "/usr/bin/env bash" $FORGE_TASKS/$1; then
         # source to allow forge api to be used
         (source $FORGE_TASKS/$1 $OPTIONS)
+    else
+        # invoke the task in a sub-shell
+        (exec $FORGE_TASKS/$1 $OPTIONS)
     fi
 
     if [ $? -eq 0 ]; then
