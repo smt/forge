@@ -7,7 +7,7 @@ source $ROOT/config.sh
 source $ROOT/utils.sh
 source $ROOT/parse-args.sh
 
-if [ -f $FORGE_TASKS/$TASK ]; then
+if [[ -f $FORGE_TASKS/$TASK ]]; then
     run_task $TASK
 else
     error "Aborting: Task $TASK does not exist"

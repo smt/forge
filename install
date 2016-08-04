@@ -9,7 +9,7 @@ read -p "Enter the target project directory to install forge (i.e. $HOME/Develop
 
 # create .forge directory in project
 # and copy down base tasks
-if [ -n "$PROJECT" ]; then
+if [[ -n $PROJECT ]]; then
     mkdir -p $PROJECT/.forge
     cp -Rn tasks $PROJECT/.forge/
 fi

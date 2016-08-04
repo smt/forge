@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # parse out task
-if [ "$#" -eq 0 ] || [[ ${1:0:1} == "-"  ]]; then
+if [[ $# -eq 0 ]] || [[ ${1:0:1} == "-"  ]]; then
     TASK="default"
 else
     TASK=$1; shift
@@ -14,7 +14,7 @@ for ((i = 1; i <= $#; i++)) ; do
             DEBUG=true
             ;;
         -h | --help)
-            if [ "$TASK" == "default" ]; then
+            if [[ $TASK == "default" ]]; then
                 usage
             else
                 task_usage $TASK
@@ -31,9 +31,7 @@ for ((i = 1; i <= $#; i++)) ; do
 done
 
 # save global options
-if [ "$#" -ne 0 ]; then
+if [[ $# -ne 0 ]]; then
     OPTIONS=$@; shift
     debug "Options: $OPTIONS"
-else
-    debug "No options given"
 fi

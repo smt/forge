@@ -42,7 +42,7 @@ version_control () {
     debug "temp_file: $temp_file"
 
     # does cache exist?
-    if [ -f $temp_file ]; then
+    if [[ -f $temp_file ]]; then
         # are files different?
         if cmp --silent $temp_file $filepath; then
             log "No changes in $filename"
@@ -69,7 +69,7 @@ enforce_version () {
     filepath=$1; shift
     $@
 
-    if [ $? -eq 0 ]; then
+    if [[ $? -eq 0 ]]; then
         debug "Caching $filepath"
         cp -f $filepath $FORGE_CACHE
     else
