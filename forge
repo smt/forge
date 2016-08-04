@@ -1,16 +1,21 @@
 #!/usr/bin/env bash
-FULLPATH=$(ls -l $(which $0) | awk '{print $NF}')
-ROOT=$(dirname $FULLPATH)
 
-source $ROOT/find-project.sh
-source $ROOT/config.sh
-source $ROOT/utils.sh
-source $ROOT/parse-args.sh
-source $ROOT/version-control.sh
+main () {
+    local path=$(ls -l $(which $0) | awk '{print $NF}')
+    local root=$(dirname $path)
 
-if [[ -f $FORGE_TASKS/$TASK ]]; then
-    run_task $TASK
-else
-    error "Aborting: Task $TASK does not exist"
-    exit 1
-fi
+    source $root/find-project.sh
+    source $root/config.sh
+    source $root/utils.sh
+    source $root/parse-args.sh
+    source $root/version-control.sh
+
+    if [[ -f $FORGE_TASKS/$TASK ]]; then
+        run_task $TASK
+    else
+        error "Aborting: Task $TASK does not exist"
+        exit 1
+    fi
+}
+
+main $@

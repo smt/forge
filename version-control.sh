@@ -14,16 +14,16 @@
 # overwritten by the current version.
 ##
 version_control () {
-    filepath=$1; shift
+    local filepath=$1; shift
 
     debug "filepath: $filepath"
     debug "cmd: $@"
 
-    # test .tmp directory exists
+    # test .cache directory exists
     mkdir -p $FORGE_CACHE
 
-    filename=$(basename $filepath)
-    temp_file=$FORGE_CACHE/$filename
+    local filename=$(basename $filepath)
+    local temp_file=$FORGE_CACHE/$filename
 
     debug "filename: $filename"
     debug "temp_file: $temp_file"
@@ -53,7 +53,7 @@ version_control () {
 #   2. Cmd to execute to enforce dependencies are installed on the project i.e. "npm install"
 ##
 enforce_version () {
-    filepath=$1; shift
+    local filepath=$1; shift
     $@
 
     if [[ $? -eq 0 ]]; then

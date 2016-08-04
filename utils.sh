@@ -8,7 +8,7 @@
 ##
 debug () {
     if [ "$DEBUG" = true ] ; then
-        echo -e "${PURPLE} ~~~ [$PROJECT DEBUG] ${NO_COLOR}"$1
+        echo -e "${PURPLE} ~~~ [$PROJECT_NAME DEBUG] ${NO_COLOR}"$1
     fi
 }
 
@@ -19,7 +19,7 @@ debug () {
 #   1. String to log
 ##
 error () {
-    echo -e "${RED} ~~~ [$PROJECT ERROR] ${NO_COLOR}"$1
+    echo -e "${RED} ~~~ [$PROJECT_NAME ERROR] ${NO_COLOR}"$1
 }
 
 ##
@@ -46,7 +46,7 @@ list_tasks () {
 #   1. String to log
 ##
 log () {
-    echo -e "${CYAN} ~~~ [$PROJECT] ${NO_COLOR}"$1
+    echo -e "${CYAN} ~~~ [$PROJECT_NAME] ${NO_COLOR}"$1
 }
 
 ##
