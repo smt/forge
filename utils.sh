@@ -99,17 +99,33 @@ task_usage () {
 #   None
 ##
 usage () {
-    echo ""
-    echo "Usage:"
-    echo -e "${GREEN}"
-    echo -e "    $0 [task] [-d]"
-    echo -e "    -d --debug     Enable debug mode"
-    echo -e "    -h --help      Show help"
-    echo -e "    -t --tasks     List all tasks"
-    echo -e "${NO_COLOR}"
-    echo "The desired task name must be the first arg."
-    echo "If no task is given, the default task will be used."
-    echo ""
-    echo "All options will be passed down to the invoked task."
-    echo ""
+    echo "
+        USAGE:
+            forge task options
+
+        OPTIONS:
+            -d --debug      Enable debug mode
+            -h --help       Show help
+            -p --perf       Show timestamps
+            -t --tasks      List all tasks
+
+        NOTES:
+            The desired task name must be the first arg.
+            If no task is given, the default task will be used.
+
+            All options will be passed down to the invoked task.
+
+        EXAMPLES:
+            Run default task:
+                forge
+
+            List all tasks:
+                forge -t
+
+            Run a task:
+                forge task
+
+            Get help for a specific task:
+                forge task -h
+    "
 }
