@@ -2,10 +2,10 @@
 FULLPATH=$(ls -l $(which $0) | awk '{print $NF}')
 ROOT=$(dirname $FULLPATH)
 
-source $ROOT/find-project
-source $ROOT/config
-source $ROOT/utils
-source $ROOT/parse-args
+source $ROOT/find-project.sh
+source $ROOT/config.sh
+source $ROOT/utils.sh
+source $ROOT/parse-args.sh
 
 if [ -f $FORGE_TASKS/$TASK ]; then
     run_task $TASK
