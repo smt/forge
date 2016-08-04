@@ -6,13 +6,13 @@ install () {
     ln -sf $DIR/forge /usr/local/bin/forge
 
     # grab where to install forge from the user
-    read -p "Enter the target project directory to install forge (i.e. $HOME/Development/project): " PROJECT
+    read -p "Enter the target project root directory to install forge (i.e. $HOME/Development/project): " project_root
 
     # create .forge directory in project
     # and copy down base tasks
-    if [[ -n $PROJECT ]]; then
-        mkdir -p $PROJECT/.forge
-        cp -Rn tasks $PROJECT/.forge/
+    if [[ -n $project_root ]]; then
+        mkdir -p $project_root/.forge
+        cp -Rn tasks $project_root/.forge/
     fi
 }
 
