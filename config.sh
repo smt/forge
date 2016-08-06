@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+#***********************************************#
+#
+# File:
+#   config.sh
+#
+# Purpose:
+#   forge's global config for use within itself
+#   and any bash script. All globals are set
+#   to readonly where possible to prevent
+#   mutation.
+#
+#***********************************************#
+
 # Paths
 readonly PROJECT_ROOT=$(pwd)
 readonly FORGE_ROOT=$PROJECT_ROOT/.forge

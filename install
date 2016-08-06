@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+#***********************************************#
+#
+# File:
+#   install
+#
+# Purpose:
+#   forge install executable. Will create a
+#   symlink in /usr/local/bin to globalize
+#   the forge cmd, and will prompt for a target
+#   project and install the base forge tasks
+#
+#***********************************************#
+
 install () {
     # create global cmd (symlink)
     DIR=$(dirname $0)

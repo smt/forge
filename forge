@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+#***********************************************#
+#
+# File:
+#   forge
+#
+# Purpose:
+#   forge executable
+#
+#***********************************************#
+
 main () {
     local path=$(ls -l $(which $0) | awk '{print $NF}')
     local root=$(dirname $path)
@@ -7,7 +17,7 @@ main () {
     source $root/find-project.sh
     source $root/config.sh
     source $root/utils.sh
-    source $root/parse-args.sh
+    source $root/parse-cmd.sh
     source $root/version-control.sh
 
     if [[ -f $FORGE_TASKS/$TASK ]]; then

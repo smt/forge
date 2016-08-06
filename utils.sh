@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+#***********************************************#
+#
+# File:
+#   utils.sh
+#
+# Purpose:
+#   Contains the forge api
+#
+#***********************************************#
+
 ##
 # Proxy debug logger that logs when DEBUG flag is set to true
 #

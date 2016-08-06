@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 
-parse_args () {
+#***********************************************#
+#
+# File:
+#   parse-cmd.sh
+#
+# Purpose:
+#   Parses the forge cmd for the task name
+#   and options
+#
+#***********************************************#
+
+parse_cmd () {
     if [[ $# -eq 0 ]] || [[ ${1:0:1} == "-"  ]]; then
         readonly TASK="default"
     else
@@ -39,4 +50,4 @@ parse_args () {
     fi
 }
 
-parse_args $@
+parse_cmd $@

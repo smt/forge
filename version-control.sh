@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+#***********************************************#
+#
+# File:
+#   version-control.sh
+#
+# Purpose:
+#   forge's version-control api for a project
+#
+#***********************************************#
+
 ##
 # Enforce version control for a package manager in a project.
 #
