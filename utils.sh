@@ -33,6 +33,16 @@ error () {
 }
 
 ##
+# Prints the current forge version
+#
+# Arguments:
+#   None
+##
+forge_version () {
+    echo "Forge v$(cat $FORGE_PROCESS/.forge-version)"
+}
+
+##
 # Get a timestamp in milliseconds.
 # Caution this function can add overhead,
 # especially for MacOS calls. It
@@ -131,7 +141,7 @@ run_task () {
 }
 
 ##
-# Show the usage for a specific task by searching
+# Print the usage for a specific task by searching
 # for multiline comments with @forge anotations
 # and printing the contents between them.
 #
@@ -147,7 +157,7 @@ task_usage () {
 }
 
 ##
-# forge usage
+# Print forge usage
 #
 # Arguments:
 #   None
@@ -162,6 +172,7 @@ usage () {
             -h --help       Show help
             -p --perf       Show timestamps
             -t --tasks      List all tasks
+            -v --version    List the current forge version
 
         NOTES:
             The desired task name must be the first arg.

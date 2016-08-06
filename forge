@@ -12,13 +12,13 @@
 
 main () {
     local path=$(ls -l $(which $0) | awk '{print $NF}')
-    local root=$(dirname $path)
+    readonly FORGE_PROCESS=$(dirname $path)
 
-    source $root/find-project.sh
-    source $root/config.sh
-    source $root/utils.sh
-    source $root/parse-cmd.sh
-    source $root/version-control.sh
+    source $FORGE_PROCESS/find-project.sh
+    source $FORGE_PROCESS/config.sh
+    source $FORGE_PROCESS/utils.sh
+    source $FORGE_PROCESS/parse-cmd.sh
+    source $FORGE_PROCESS/version-control.sh
 
     if [[ -f $FORGE_TASKS/$TASK ]]; then
         run_task $TASK

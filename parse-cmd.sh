@@ -38,6 +38,10 @@ parse_cmd () {
                 list_tasks
                 exit
                 ;;
+            -v | --version)
+                forge_version
+                exit
+                ;;
             -*) # unknown opt
                 ;;
         esac
