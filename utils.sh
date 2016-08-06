@@ -33,7 +33,12 @@ error () {
 }
 
 ##
-# Get a timestamp in milliseconds
+# Get a timestamp in milliseconds.
+# Caution this function can add overhead,
+# especially for MacOS calls. It
+# may be better to use the "time" cmd
+# and run it against the forge invocation
+# i.e. "time forge"
 #
 # Arguments:
 #   None

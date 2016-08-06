@@ -24,27 +24,27 @@ git clone git@github.com:quidmonkey/forge.git ~/.forge && ~/.forge/install
 What forge does is install a global cmd for every developer to run on their machine, and creates a `.forge/` directory in the project root. Within the `.forge/` is a `tasks/` directory that contains various executable scripts. These scripts can be written in any language, using a `/usr/bin/env` invocation, and can do whatever the project requires. No longer does the project need to be chained to a specific toolchain e.g. `maven` or `gulp`. Forge acts a proxy for these tasks, and acts as a simple interface that only needs to be learned once.
 
 To run a forge task, run:
-```
+```script
 forge task
 ```
 
 To run the default task, run:
-```
+```script
 forge
 ```
 
 To get help, run:
-```
+```script
 forge -h
 ```
 
 To get help for a specific task, run:
-```
+```script
 forge task -h
 ```
 
 To list all available forge tasks, run:
-```
+```script
 forge -t
 ```
 
@@ -69,3 +69,58 @@ In a nutshell, Forge can be thought of as "the one command to rule them all." So
 Forge was created to be infinitely scalable, toolchain agnostic, and one may hope, replace the daily travails of the local development. It was written in Bash, because Bash is the original JavaScript, being ubiquitous, it is fast, and it allows the flexibility to run any script in any language.
 
 Now go out, and Forge!
+
+## Api
+
+```script
+debug string
+```
+
+Logs a string if `$DEBUG` is set to true by passing the `-d` flag to forge.
+
+```script
+error string
+```
+
+Logs an error
+
+```script
+get_time
+```
+
+Get the current timestamp in milliseconds. Be aware that this function can add overhead, especially for MacOS, which does not support millisecond accuracy for the Bash `date` cmd. Or order to achieve millisecond accuracy, MacOS must make calls to a system language. It may be better to invoke forge with the `time` cmd e.g. `time forge`.
+
+```script
+is_mac_os
+```
+
+Returns true, if the current OS is MacOS; false, otherwise.
+
+```script
+list_tasks
+```
+Lists the available forge tasks in a project.
+
+```script
+log string
+```
+
+Logs a string.
+
+```script
+run_task task options
+```
+
+Runs a task of the same name in the `.forge/tasks` directory. Any Bash task will be sourced, allowing access to the forge api. Any non-Bash task will be executed in a sub-shell. All options invoked with Forge will be passed down to the task that is run.
+
+```script
+task_usage task
+```
+
+Prints the documentation for any forge task that has been annotated using the `@forge` directives.
+
+```script
+usage
+```
+
+Prints the documentation for forge
