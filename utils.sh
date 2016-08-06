@@ -33,7 +33,7 @@ error () {
 ##
 get_time () {
     if [[ is_mac_os ]]; then
-        python -c "import time; print int(round(time.time() * 1000))"
+        ruby -e "puts (Time.now.to_f.round(3)*1000).to_i"
     else
         date +%s%3N
     fi
