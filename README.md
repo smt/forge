@@ -1,18 +1,18 @@
 # Forge
 
-This is a tool to allow for scalable local development for larger teams.
+This is a tool for scalable local development for larger teams.
 
 It attempts to solve several problems:
 
 * How do I keep a group of developers in sync?
-* How do enable my developers to compile or transpile their code in a codebase that is subject to change at any moment?
-* How do I scale my toolchain without having to redo my current toolchain for force developers to learn a new tool?
-* How do I handle Developers who don't know their way around a shell?
+* How do enable my developers to compile or transpile a codebase that is subject to change at any moment?
+* How do I scale my toolchain without having to rewrite my toolchain or force developers to learn a new tool?
+* How do I handle developers who don't know their way around a shell?
 * How do I minimize the number of commands I must memorize to make my application run?
 
 ## Containerization
 
-It's important to mention up-front that Forge is not seeking to replace containerization i.e. Docker, but is intended to complement it. When it comes to env setup and enforcement, containerization is the best solution; but containerization does not solve how to run or develop an application; nor does it deal well with the idiosyncrasies of varying language-based package managers, without resulting to long container initialization times. This is where Forge comes in.
+It's important to mention that Forge is not seeking to replace containerization i.e. Docker, but is intended to complement it. When it comes to env setup and config, containerization is the best solution; but containerization does not solve how to run or develop an application; nor does it deal well with the idiosyncrasies of varying language-based package managers, without resulting to long container initialization times and tedious curation. This is where Forge comes in.
 
 ## Install
 ```
@@ -21,7 +21,7 @@ git clone git@github.com:quidmonkey/forge.git ~/.forge && ~/.forge/install
 
 ## How It Works
 
-What forge does is install a global cmd for every developer to run on their machine, and creates a `.forge/` directory in the project root. Within the `.forge/` is a `tasks/` directory that contains various executable scripts. These scripts can be written in any language, using a `/usr/bin/env` invocation, and can do whatever the project requires. No longer does the project need to be chained to a specific toolchain e.g. `maven` or `gulp`. Forge acts a proxy for these tasks, and acts as a simple interface that only needs to be learned once.
+When the `install` executable is run, it creates a global `forge` cmd in `/usr/local/bin` for every developer to run on their machine. The `install` executable also prompts for a target project directory and creates a `.forge/` directory within the project root. This `.forge/` directory contains a `tasks/` directory full various executable scripts called tasks. These tasks can be written in any language by using a `/usr/bin/env` invocation, and they can do whatever the project requires. No longer does the project need to be chained to a specific toolchain e.g. `maven` or `gulp`. Instead, forge acts a proxy for these tasks, offering a simple interface that only needs to be learned once.
 
 To run a forge task, run:
 ```script
@@ -48,17 +48,21 @@ To list all available forge tasks, run:
 forge -t
 ```
 
-Other commands exist to make the development experience easier. Dig into the forge help cmd to find out more.
+Other commands exist to make the development experience easier. Run `forge -h` to find out more.
 
 ## Tasks
 
-Dig into the `tasks/` directory of this repo or a project you installed forge into for examples of how to create your own tasks. To create a task, all that is required is that the task file is added to the `tasks/` directory and includes a `/usr/bin/env` invocation. In addition, it is encouraged that task documentation is added to the task by leaving a multiline comment annotated with `@forge` directives. This documentation is what will be displayed in the terminal when the `forge task -h` cmd is run. See the examples tasks to see how it is done.
+Dig into the `tasks/` directory of this repo or a project you installed forge into for examples of how to create your own tasks. To create a task, all that is required is to add a task to the `tasks/` directory that includes a `/usr/bin/env` invocation. Whatever the task is named is how the task will be invoked by forge e.g. I create a `tests` task to run my project's specs, and I invoke it using `forge tests`.
+
+The one task that must always exist is the `default` task, which is installed by default. The thinking behind this task is that the entire dev toolchain can be dumped into it, so that all developers must do is run `forge` to begin development on a project.
+
+It is encouraged that task documentation be added for every task. This is done by leaving a multiline comment annotated with `@forge` directives. This documentation is what will be displayed in the terminal when the `forge task -h` cmd is run. See the included examples tasks to see how it is done.
 
 ## Version Control
 
-One of the central problems of local development is version control. While Forge does not seek to replace containerization, it does seek to keep to complement and simplify the process of version control during development. Forge exposes a `version_control` function that takes two parameters: a file to check for version control and a cmd to execute if the file is stale. Forge handles version control by caching a copy of the file that it is given to version control e.g. package.json or requirements.txt. Each time a version_control is run for the file, Forge checks for an associated file of the same name in its cache, and then it diffs the current file with the cached file. If a difference is found, the associated cmd is executed to bring the file up-to-date, and then the cache is updated with the new file.
+One of the central problems of local development is version control. While Forge does not seek to replace containerization, it does seek to keep to complement and simplify the process of version control during development. Forge exposes a `version_control` function that takes two parameters: a file that lists project dependencies (e.g. `package.json` or `requirements.txt`) and a cmd to execute if the file is stale (e.g. `npm install` or `pip install`. Forge handles version control by caching a copy of the dependencies file that it is given to version control. Each time a `version_control` cmd is run for the file, Forge checks for an associated file of the same name in its cache, and then diffs the current file with the cached version. If a difference is found, the associated cmd is executed to bring the file up-to-date, and then the cache is updated with the new file.
 
-If `version_control` is used within a task that a developer runs all the time i.e. the default task, then version control is always exerted on the codebase, and the developer never has to manual check for updates to project dependencies. No more will a developer have to run `npm install` or `pip install` or be told that a new dependency has been added to the codebase. It will all be taken care of seamlessly by forge as it is run.
+If `version_control` is used within a task that a developer runs all the time i.e. the `default` task, then version control is always exerted on the codebase, and the developer never has to manual check for updates to project dependencies. No more will a developer have to run `npm install` or `pip install` or be told that a new dependency has been added to the codebase. It will all be taken care of seamlessly by forge as it is run. It is encouraged by make use of `version_control` with all dependency files, especially within the `default` task.
 
 See the use of `version_control` in the default task and the `version_control.sh` file for more info.
 
@@ -66,7 +70,7 @@ See the use of `version_control` in the default task and the `version_control.sh
 
 In a nutshell, Forge can be thought of as "the one command to rule them all." Some may argue that they prefer experienced developers to something so simple, but one wonders if they have had the experience of dealing with broken machines on a daily basis, or running a complex set of cmds as a project matures, or having to rewrite the toolchain because the project far out-scaled what was originally envisioned. Forge offers a single interface to gently introduce developers to the cmd line, while offering up the ability for experienced developers to go wild creating tasks and modify Forge to their heart's content (and please submit good ideas as pull requests!).
 
-Forge was created to be infinitely scalable, toolchain agnostic, and one may hope, replace the daily travails of the local development. It was written in Bash, because Bash is the original JavaScript, being ubiquitous, it is fast, and it allows the flexibility to run any script in any language.
+Forge was created to be scalable and toolchain agnostic. It was written in Bash, because Bash is the original JavaScript, being ubiquitous; it is fast; and it allows the flexibility to run any script in any language.
 
 Now go out, and Forge!
 
