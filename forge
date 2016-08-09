@@ -12,7 +12,7 @@
 
 main () {
     local path=$(ls -l $(which $0) | awk '{print $NF}')
-    readonly FORGE_PROCESS=$(dirname $path)
+    readonly FORGE_PROCESS=${path%/*}
 
     source $FORGE_PROCESS/find-project.sh
     source $FORGE_PROCESS/config.sh

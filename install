@@ -15,7 +15,10 @@
 
 install () {
     # create global cmd (symlink)
-    DIR=$(dirname $0)
+    DIR=${0%/*}
+    if [[ "$DIR" == "." ]]; then
+        DIR=$(pwd)
+    fi
     ln -sf $DIR/forge /usr/local/bin/forge
 
     # grab where to install forge from the user
