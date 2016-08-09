@@ -11,6 +11,19 @@
 #***********************************************#
 
 ##
+# Tests if a bash command exists
+#
+# Arguments:
+#   1. Command to test
+#
+# Returns
+#   True, if the command exists; false, otherwise.
+##
+command_exists () {
+    command -v $1 >/dev/null 2>&1
+}
+
+##
 # Proxy debug logger that logs when DEBUG flag is set to true
 #
 # Arguments:
@@ -44,7 +57,7 @@ forge_version () {
 
 ##
 # Get a timestamp in milliseconds.
-# Caution this function can add overhead,
+# CAUTION: this function can add overhead,
 # especially for MacOS calls. It
 # may be better to use the "time" cmd
 # and run it against the forge invocation
@@ -58,7 +71,13 @@ forge_version () {
 ##
 get_time () {
     if [[ is_mac_os ]]; then
-        ruby -e "puts (Time.now.to_f.round(3)*1000).to_i"
+        # attempt to use the GNU date if coreutils have
+        # been installed, otherwise falllback to ruby
+        if command_exists gdate; then
+            gdate +%s%3N
+        else
+            ruby -e "puts (Time.now.to_f.round(3)*1000).to_i"
+        fi
     else
         date +%s%3N
     fi

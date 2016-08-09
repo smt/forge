@@ -81,6 +81,12 @@ Now go out, and Forge!
 ## Api
 
 ```script
+command_exists cmd
+```
+
+Tests if a command exists, and returns true if it does, or false, otherwise.
+
+```script
 debug string
 ```
 
@@ -96,7 +102,7 @@ Logs an error
 get_time
 ```
 
-Get the current timestamp in milliseconds. Be aware that this function can add overhead, especially for MacOS, which does not support millisecond accuracy for the Bash `date` cmd. Or order to achieve millisecond accuracy, MacOS must make calls to a system language. It may be better to invoke forge with the `time` cmd e.g. `time forge`.
+Get the current timestamp in milliseconds. Be aware that this function can add overhead, especially for MacOS, which does not support millisecond accuracy for the Bash `date` cmd. Or order to achieve millisecond accuracy, MacOS will first check to see if GNU utils have been installed, and if not, must make calls to a system language. It may be better to invoke forge with the `time` cmd e.g. `time forge`.
 
 ```script
 is_mac_os
