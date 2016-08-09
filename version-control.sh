@@ -32,7 +32,7 @@ version_control () {
     # test .cache directory exists
     mkdir -p $FORGE_CACHE
 
-    local filename=$(basename $filepath)
+    local filename=${filepath##*/}
     local temp_file=$FORGE_CACHE/$filename
 
     debug "filename: $filename"
