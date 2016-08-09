@@ -1,16 +1,16 @@
 #!/usr/bin/env ruby
 
 =begin
-    @forge
-        Task:
-            sample-ruby-task
+@forge
+    Task:
+        sample-ruby-task
 
-        Purpose:
-            Sample Ruby task
+    Purpose:
+        Sample Ruby task
 
-        Arguments:
-            None
-    @forge
+    Arguments:
+        None
+@forge
 =end
 
 puts 'Hello Ruby'

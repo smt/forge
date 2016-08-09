@@ -1,6 +1,6 @@
 # Forge
 
-This is a tool for scalable local development for larger teams.
+This is a task runner for scalable local development for larger teams.
 
 It attempts to solve several problems:
 
