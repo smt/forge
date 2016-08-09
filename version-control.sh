@@ -33,7 +33,7 @@ version_control () {
     mkdir -p $FORGE_CACHE
 
     local filename=${filepath##*/}
-    local temp_file=$FORGE_CACHE/$filename
+    local temp_file=$FORGE_CACHE/$(get_cache_key $filepath)
 
     debug "filename: $filename"
     debug "temp_file: $temp_file"
@@ -68,9 +68,23 @@ enforce_version () {
 
     if [[ $? -eq 0 ]]; then
         debug "Caching $filepath"
-        cp -f $filepath $FORGE_CACHE
+        cp -f $filepath $FORGE_CACHE/$(get_cache_key $filepath)
     else
         error "Aborting: Unable to cache and execute $@"
         exit 1
     fi
+}
+
+##
+# Get the cache filename for files forge
+# has stored in its .cache directory.
+#
+# Arguments:
+#   1. Absolute filepath
+#
+# Returns:
+#   Cache key of the filepath with forward slashes replaced.
+##
+get_cache_key () {
+    echo "${1//\//_}"
 }
