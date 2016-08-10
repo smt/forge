@@ -36,13 +36,17 @@ debug () {
 }
 
 ##
-# Proxy error logger
+# Throw an error. Acts as a proxy logger
+# and will terminate the script
 #
 # Arguments:
 #   1. String to log
+#   2. Error exit code (Defaults to 1)
 ##
 error () {
+    local code=${2:-1}
     echo -e "${RED} ~~~ [$PROJECT_NAME ERROR] ${NO_COLOR}"$1
+    exit $code
 }
 
 ##

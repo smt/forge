@@ -118,10 +118,11 @@ Example: `debug "Filename: $filename"`
 error string
 ```
 
-Logs an error.
+Throw an error by logging a string and terminating the script
 
 **Arguments**
 * A string to log as an error
+* Exit code (Defaults to 1)
 
 **Returns**
 * None
