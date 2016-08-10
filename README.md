@@ -28,27 +28,27 @@ If you using forge to generate your build artifact, you will likely not want to 
 When the `install` executable is run, it creates a global `forge` cmd in `/usr/local/bin` for every developer to run on their machine. The `install` executable also prompts for a target project directory and creates a `.forge/` directory within the project root. This `.forge/` directory contains a `tasks/` directory full various executable scripts called tasks. These tasks can be written in any language by using a `/usr/bin/env` invocation, and they can do whatever the project requires. No longer does the project need to be chained to a specific toolchain e.g. `maven` or `gulp`. Instead, forge acts a proxy for these tasks, offering a simple interface that only needs to be learned once.
 
 To run a forge task, run:
-```script
+```shell
 forge task
 ```
 
 To run the default task, run:
-```script
+```shell
 forge
 ```
 
 To get help, run:
-```script
+```shell
 forge -h
 ```
 
 To get help for a specific task, run:
-```script
+```shell
 forge task -h
 ```
 
 To list all available forge tasks, run:
-```script
+```shell
 forge -t
 ```
 
@@ -80,74 +80,197 @@ Now go out, and Forge!
 
 ## Api
 
-```script
+### command_exists
+
+```shell
 command_exists cmd
 ```
 
 Tests if a command exists, and returns true if it does, or false, otherwise.
 
-```script
+**Arguments**
+* Shell command
+
+**Returns**
+* None
+
+Example: `command_exists pwd # => True`
+
+### debug
+
+```shell
 debug string
 ```
 
 Logs a string if `$DEBUG` is set to true by passing the `-d` flag to forge.
 
-```script
+**Arguments**
+* A string to log for debugging
+
+**Returns**
+* None
+
+Example: `debug "Filename: $filename"`
+
+### error
+
+```shell
 error string
 ```
 
 Logs an error.
 
-```script
+**Arguments**
+* A string to log as an error
+
+**Returns**
+* None
+
+Example: `error "Missing $option, unable to run task."`
+
+### get_opt_val
+
+```shell
 get_opt_val option cmd_line_args
 ```
 
 Gets the value for a cmd line option.
 
-```script
+**Arguments**
+* The option to get the value for
+* Cmd line options
+
+**Returns**
+* The option's value
+
+Example: `get_opt_val "--file" $@ # => file value i.e. /path/to/some_file`
+
+### get_time
+
+```shell
 get_time
 ```
 
 Get the current timestamp in milliseconds. Be aware that this function can add overhead, especially for MacOS, which does not support millisecond accuracy for the Bash `date` cmd. Or order to achieve millisecond accuracy, MacOS will first check to see if GNU utils have been installed, and if not, must make calls to a system language. It may be better to invoke forge with the `time` cmd e.g. `time forge`.
 
-```script
+**Arguments**
+* None
+
+**Returns**
+* None
+
+Example: `get_time # => 1470796289301`
+
+### has_opt
+
+```shell
 has_opt option cmd_line_args
 ```
 
 Checks to see if an option exists.
 
-```script
+**Arguments**
+* The option to get the value for
+* Cmd line options
+
+**Returns**
+* True, if the option exists; false, otherwise
+
+Example: `has_opt "--file" $@ # => True`
+
+### is_mac_os
+
+```shell
 is_mac_os
 ```
 
 Returns true, if the current OS is MacOS; false, otherwise.
 
-```script
+**Arguments**
+* None
+
+**Returns**
+* True, if the current OS is MacOS; false, otherwise
+
+Example: `is_mac_os # => True`
+
+### list_tasks
+
+```shell
 list_tasks
 ```
 
 Lists the available forge tasks in a project.
 
-```script
+**Arguments**
+* None
+
+**Returns**
+* None
+
+Example: `list_tasks`
+
+### log
+
+```shell
 log string
 ```
 
 Logs a string.
 
-```script
+**Arguments**
+* A string to log for debugging
+
+**Returns**
+* None
+
+Example: `log "Something interesting happened"`
+
+### run_task
+
+```shell
 run_task task options
 ```
 
 Runs a task of the same name in the `.forge/tasks` directory. Any Bash task will be sourced, allowing access to the forge api. Any non-Bash task will be executed in a sub-shell. All options invoked with Forge will be passed down to the task that is run.
 
-```script
+**Arguments**
+* Forge task to run
+* Any number of options to pass to the task
+
+**Returns**
+* None
+
+Example: `run_task "compile-code" $@`
+
+### task_usage
+
+```shell
 task_usage task
 ```
 
 Prints the documentation for any forge task that has been annotated using the `@forge` directives.
 
-```script
+**Arguments**
+* Forge task to print usage for
+
+**Returns**
+* None
+
+Example: `task_usage "compile-code"`
+
+### usage
+
+```shell
 usage
 ```
 
 Prints the documentation for forge.
+
+**Arguments**
+* None
+
+**Returns**
+* None
+
+Example: `usage`
