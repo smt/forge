@@ -32,5 +32,5 @@ readonly YELLOW='\033[0;33m'
 readonly PROJECT_NAME="Forge"
 
 # Mutables
-DEBUG=false
-PERF=false
+DEBUG=false     # debug mode
+PERF=false      # performance mode
