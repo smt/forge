@@ -56,6 +56,35 @@ forge_version () {
 }
 
 ##
+# Get the value for a cmd line option
+#
+# Parameters
+#   1. Option to get the value for
+#   2. Cmd line args
+#
+# Return
+#   Cmd line option's value
+##
+get_opt_val () {
+    local key=$1; shift
+    local val
+
+    for ((i = 1; i <= $#; i++)) ; do
+        if [[ ${!i} == $key ]]; then
+            i=$((i+1))
+            val=${!i}
+            if [[ ${val:0:1} == "-" ]]; then
+                error "$key is missing a value"
+                val=""
+                break
+            fi
+        fi
+    done
+
+    echo $val
+}
+
+##
 # Get a timestamp in milliseconds.
 # CAUTION: this function can add overhead,
 # especially for MacOS calls. It
@@ -81,6 +110,30 @@ get_time () {
     else
         date +%s%3N
     fi
+}
+
+##
+# Check to see if a cmd line option is present
+#
+# Parameters
+#   1. Option to check for
+#   2. Cmd line args
+#
+# Return
+#   True, if the option is present; false, otherwise.
+##
+has_opt () {
+    local arg=false
+    local key=$1; shift
+
+    for ((i = 1; i <= $#; i++)) ; do
+        if [[ ${!i} == $key ]]; then
+            arg=true
+            break
+        fi
+    done
+
+    echo $arg
 }
 
 ##

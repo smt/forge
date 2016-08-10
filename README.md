@@ -96,13 +96,25 @@ Logs a string if `$DEBUG` is set to true by passing the `-d` flag to forge.
 error string
 ```
 
-Logs an error
+Logs an error.
+
+```script
+get_opt_val option cmd_line_args
+```
+
+Gets the value for a cmd line option.
 
 ```script
 get_time
 ```
 
 Get the current timestamp in milliseconds. Be aware that this function can add overhead, especially for MacOS, which does not support millisecond accuracy for the Bash `date` cmd. Or order to achieve millisecond accuracy, MacOS will first check to see if GNU utils have been installed, and if not, must make calls to a system language. It may be better to invoke forge with the `time` cmd e.g. `time forge`.
+
+```script
+has_opt option cmd_line_args
+```
+
+Checks to see if an option exists.
 
 ```script
 is_mac_os
@@ -113,6 +125,7 @@ Returns true, if the current OS is MacOS; false, otherwise.
 ```script
 list_tasks
 ```
+
 Lists the available forge tasks in a project.
 
 ```script
@@ -137,4 +150,4 @@ Prints the documentation for any forge task that has been annotated using the `@
 usage
 ```
 
-Prints the documentation for forge
+Prints the documentation for forge.
