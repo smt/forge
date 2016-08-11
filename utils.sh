@@ -239,9 +239,12 @@ task_usage () {
 #   None
 ##
 usage () {
-    echo "
+    echo -e "
         USAGE:
             forge task options
+
+        SETUP A PROJECT:
+            Run \"forge install\" in the project root to initialize forge.
 
         OPTIONS:
             -d --debug      Enable debug mode

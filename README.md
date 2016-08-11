@@ -15,17 +15,12 @@ It attempts to solve several problems:
 It's important to mention that Forge is not seeking to replace containerization i.e. Docker, but is intended to complement it. When it comes to env setup and config, containerization is the best solution; but containerization does not solve how to run or develop an application; nor does it deal well with the idiosyncrasies of varying language-based package managers, without resulting to long container initialization times and tedious curation. This is where Forge comes in.
 
 ## Install
+
 ```
-git clone git@github.com:quidmonkey/forge.git ~/.forge && ~/.forge/install
+git clone git@github.com:quidmonkey/forge.git ~/.forge
 ```
 
-## Build Notes
-
-If you using forge to generate your build artifact, you will likely not want to run the install script. Instead, clone down the forge repo to your build server and invoke the `forge` executable directly with whatever build tasks you may need e.g. `forge build`.
-
-## How It Works
-
-When the `install` executable is run, it creates a global `forge` cmd in `/usr/local/bin` for every developer to run on their machine. The `install` executable also prompts for a target project directory and creates a `.forge/` directory within the project root. This `.forge/` directory contains a `tasks/` directory full various executable scripts called tasks. These tasks can be written in any language by using a `/usr/bin/env` invocation, and they can do whatever the project requires. No longer does the project need to be chained to a specific toolchain e.g. `maven` or `gulp`. Instead, forge acts a proxy for these tasks, offering a simple interface that only needs to be learned once.
+When the `install` executable is run, it creates a global `forge` cmd in `/usr/local/bin` for every developer to run on their machine. To setup forge for a project, `cd` in the project root and run `forge install`. This will create a `.forge/` directory within the project root. This `.forge/` directory contains a `tasks/` directory full of various executable scripts called tasks. These tasks can be written in any language by using a `/usr/bin/env` invocation, and they can do whatever the project requires. No longer does the project need to be chained to a specific toolchain e.g. `maven` or `gulp`. Instead, forge acts a proxy for these tasks, offering a simple interface that only needs to be learned once.
 
 To run a forge task, run:
 ```shell
@@ -53,6 +48,10 @@ forge -t
 ```
 
 Other commands exist to make the development experience easier. Run `forge -h` to find out more.
+
+## Build Notes
+
+If you using forge to generate your build artifact, you will likely not want to run the install script. Instead, clone down the forge repo to your build server and invoke the `forge` executable directly with whatever build tasks you may need e.g. `forge build`.
 
 ## Tasks
 
