@@ -11,6 +11,15 @@
 #
 #***********************************************#
 
+##
+# Parse the cmd line for the forge task and options
+#
+# Arguments:
+#   Cmd line args
+#
+# Returns:
+#   None
+##
 parse_cmd () {
     if [[ $# -eq 0 ]] || [[ ${1:0:1} == "-"  ]]; then
         readonly TASK="default"

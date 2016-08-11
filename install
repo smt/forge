@@ -13,6 +13,15 @@
 #
 #***********************************************#
 
+##
+# Install forge globally
+#
+# Arguments:
+#   None
+#
+# Returns:
+#   None
+##
 install () {
     # create global cmd (symlink)
     DIR=${0%/*}

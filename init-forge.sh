@@ -19,6 +19,9 @@
 #
 # Arguments:
 #   None
+#
+# Returns:
+#   None
 ##
 init_forge () {
     if [[ $1 == "install" ]]; then

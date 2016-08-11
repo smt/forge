@@ -15,6 +15,16 @@
 #
 #***********************************************#
 
+##
+# Find the nearest forge project. Will terminate
+# with an error if no project is found.
+#
+# Arguments:
+#   None
+#
+# Returns:
+#   None
+##
 find_project () {
     while [[ ! -d $(pwd)/.forge ]] && [[ $(pwd) != $HOME ]]; do
         cd ..

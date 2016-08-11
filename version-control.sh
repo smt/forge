@@ -13,15 +13,18 @@
 ##
 # Enforce version control for a package manager in a project.
 #
-# Arguments:
-#    1. Dependencies listing file i.e. "package.json"
-#    2. Cmd to execute to enforce dependencies are installed on the project i.e. "npm install"
-#
-# Function works by caching a copy of the dependencies listing file and comparing
+# This function works by caching a copy of the dependencies listing file and comparing
 # the cached version to the current version. If the two are identical, the project
 # is considered up-to-date and no-opt occurs. If the two are a mismatch, the given
 # cmd is executed to update the project, and the cached version of the file is
 # overwritten by the current version.
+#
+# Arguments:
+#    1. Dependencies listing file i.e. "package.json"
+#    2. Cmd to execute to enforce dependencies are installed on the project i.e. "npm install"
+#
+# Returns:
+#   None
 ##
 version_control () {
     local filepath=$1; shift
@@ -61,6 +64,9 @@ version_control () {
 # Arguments:
 #   1. Dependencies listing file i.e. "package.json"
 #   2. Cmd to execute to enforce dependencies are installed on the project i.e. "npm install"
+#
+# Returns:
+#   None
 ##
 enforce_version () {
     local filepath=$1; shift

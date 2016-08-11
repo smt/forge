@@ -16,7 +16,7 @@
 # Arguments:
 #   1. Command to test
 #
-# Returns
+# Returns:
 #   True, if the command exists; false, otherwise.
 ##
 command_exists () {
@@ -28,6 +28,9 @@ command_exists () {
 #
 # Arguments:
 #   1. String to log
+#
+# Returns:
+#   None
 ##
 debug () {
     if [ "$DEBUG" = true ] ; then
@@ -42,6 +45,9 @@ debug () {
 # Arguments:
 #   1. String to log
 #   2. Error exit code (Defaults to 1)
+#
+# Returns:
+#   None
 ##
 error () {
     local code=${2:-1}
@@ -54,6 +60,9 @@ error () {
 #
 # Arguments:
 #   None
+#
+# Returns:
+#   None
 ##
 forge_version () {
     echo "Forge v$(cat $FORGE_PROCESS/.forge-version)"
@@ -62,11 +71,11 @@ forge_version () {
 ##
 # Get the value for a cmd line option
 #
-# Parameters
+# Arguments:
 #   1. Option to get the value for
 #   2. Cmd line args
 #
-# Return
+# Returns:
 #   Cmd line option's value
 ##
 get_opt_val () {
@@ -119,11 +128,11 @@ get_time () {
 ##
 # Check to see if a cmd line option is present
 #
-# Parameters
+# Arguments:
 #   1. Option to check for
 #   2. Cmd line args
 #
-# Return
+# Returns:
 #   True, if the option is present; false, otherwise.
 ##
 has_opt () {
@@ -158,6 +167,9 @@ is_mac_os () {
 #
 # Arguments:
 #   None
+#
+# Returns:
+#   None
 ##
 list_tasks () {
     echo ""
@@ -175,6 +187,9 @@ list_tasks () {
 #
 # Arguments:
 #   1. String to log
+#
+# Returns:
+#   None
 ##
 log () {
     echo -e "${CYAN} ~~~ [$PROJECT_NAME] ${NO_COLOR}"$1
@@ -186,6 +201,9 @@ log () {
 #
 # Arguments:
 #   1. Task to run
+#
+# Returns:
+#   None
 ##
 run_task () {
     log "Starting $1..."
@@ -223,6 +241,9 @@ run_task () {
 #
 # Arguments:
 #   1. Task to get usage for
+#
+# Returns:
+#   None
 ##
 task_usage () {
     echo ""
@@ -236,6 +257,9 @@ task_usage () {
 # Print forge usage
 #
 # Arguments:
+#   None
+#
+# Returns:
 #   None
 ##
 usage () {
