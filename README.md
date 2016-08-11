@@ -281,24 +281,26 @@ These are the globally available values that are available within Forge:
 
 ```shell
 # Paths
-readonly PROJECT_ROOT=$(pwd)
-readonly FORGE_ROOT=$PROJECT_ROOT/.forge
-readonly FORGE_CACHE=$FORGE_ROOT/.cache
-readonly FORGE_TASKS=$FORGE_ROOT/tasks
+readonly PROJECT_ROOT               # the project root where forge is installed in
+readonly FORGE_ROOT                 # the .forge/ directory in the project root
+readonly FORGE_CACHE                # the forge cache directory
+readonly FORGE_TASKS                # the tasks directory
 
 # Colors
-readonly BLACK='\033[0;30m'
-readonly CYAN='\033[0;34m'
-readonly GREEN='\033[0;32m'
-readonly NO_COLOR='\033[0m'
-readonly PURPLE='\033[0;35m'
-readonly RED='\033[0;31m'
-readonly YELLOW='\033[0;33m'
+readonly BLACK
+readonly CYAN
+readonly GREEN
+readonly NO_COLOR
+readonly PURPLE
+readonly RED
+readonly YELLOW
 
 # Vars
-readonly PROJECT_NAME="Forge"
+readonly OPTIONS                    # cmd line options
+readonly PROJECT_NAME               # name of the project, defaults to forge
+readonly TASK                       # current forge task
 
 # Mutables
-DEBUG=false     # debug mode
-PERF=false      # performance mode
+DEBUG                               # debug mode flag
+PERF                                # performance mode flag
 ```
