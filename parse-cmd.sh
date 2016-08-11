@@ -27,7 +27,7 @@ parse_cmd () {
         readonly TASK=$1; shift
     fi
 
-    for ((i = 1; i <= $#; i++)) ; do
+    for ((i = 1; i <= $#; i++)); do
         case ${!i} in
             -d | --debug)
                 DEBUG=true
