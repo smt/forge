@@ -275,6 +275,23 @@ Prints the documentation for forge.
 
 Example: `usage`
 
+### version_control
+
+```shell
+version_control file cmd
+```
+
+Exert version control on a file by caching a copy of it and comparing the cached version of the file to the current file. If the two are found to be different, run the given cmd, and cache a copy of the current file. The `version_control` function for a specific file will need to be run every time a task is run.
+
+**Arguments**
+* File to version control
+* Cmd to run if the file is found to be stale
+
+**Returns**
+* None
+
+Example: `version_control "$PROJECT_ROOT/package.json" "npm install"`
+
 ## Config
 
 These are the globally available values that are available within Forge:
