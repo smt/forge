@@ -20,7 +20,7 @@ get_options () {
         fi
     fi
 
-    echo $options
+    printf "%s" "$options"
 }
 
 ##
@@ -49,7 +49,7 @@ get_opt_val () {
         fi
     done
 
-    echo $val
+    printf "%s" "$val"
 }
 
 ##
@@ -68,7 +68,7 @@ get_task () {
         task=$1
     fi
 
-    echo $task
+    printf "%s" "$task"
 }
 
 ##
@@ -92,5 +92,5 @@ has_opt () {
         fi
     done
 
-    echo $arg
+    printf "%s" "$arg"
 }

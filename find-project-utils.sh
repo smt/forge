@@ -24,5 +24,5 @@ find_project () {
 
     cd $start_dir
 
-    echo $project_dir
+    printf "%s" "$project_dir"
 }

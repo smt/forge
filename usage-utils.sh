@@ -11,7 +11,7 @@
 ##
 forge_version () {
     local forge_process=$1
-    echo "Forge v$(cat $forge_process/.forge-version)"
+    printf "Forge v%s\n" "$(cat $forge_process/.forge-version)"
 }
 
 ##
@@ -24,7 +24,7 @@ forge_version () {
 #   None
 ##
 install_usage () {
-    echo "
+    printf "
         USAGE:
             forge install
 
@@ -33,7 +33,7 @@ install_usage () {
             The directory this cmd is run in will be where .forge/ installs,
             and it will be considered the root directory of the project.
             The .forge/ directory will initialize with the example forge tasks.
-    "
+    \n"
 }
 
 ##
@@ -46,14 +46,12 @@ install_usage () {
 #   None
 ##
 list_tasks () {
-    echo "
-    Forge Tasks:
-    "
+    printf "\n    Forge Tasks:\n\n"
     for filepath in $FORGE_TASKS/*; do
         t=${filepath##*/}
-        echo "        - $t"
+        printf "        - $t\n"
     done
-    echo ""
+    printf "\n"
 }
 
 ##
@@ -74,7 +72,7 @@ task_usage () {
         error "Aborting: Unable to find @forge help docs for task ${1##*/}"
     fi
 
-    echo -e "\n$task_help\n"
+    printf '\n%s\n\n' "$task_help"
 }
 
 ##
@@ -87,7 +85,7 @@ task_usage () {
 #   None
 ##
 usage () {
-    echo "
+    printf "
         USAGE:
             forge task options
 
@@ -119,5 +117,5 @@ usage () {
 
             Get help for a specific task:
                 forge task -h
-    "
+    \n"
 }

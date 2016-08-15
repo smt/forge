@@ -10,11 +10,8 @@
 #   None
 ##
 debug () {
-    local colorless='\033[0m'
-    local purple='\033[0;35m'
-
     if [ "$DEBUG" = true ]; then
-        echo -e "${purple} ~~~ [FORGE DEBUG] ${colorless}$1"
+        printf "\e\033[0;35m ~~~ [FORGE DEBUG]\e\033[0m %s\n" "$1"
     fi
 }
 
@@ -31,13 +28,10 @@ debug () {
 ##
 error () {
     local code=${2:-1}
-    local colorless='\033[0m'
-    local red='\033[0;31m'
 
-    echo -e "${red} ~~~ [FORGE ERROR] ${colorless}$1"
+    printf "\e\033[0;31m ~~~ [FORGE ERROR]\e\033[0m %s\n" "$1"
     exit $code
 }
-
 
 ##
 # Proxy logger
@@ -49,8 +43,5 @@ error () {
 #   None
 ##
 log () {
-    local cyan='\033[0;34m'
-    local colorless='\033[0m'
-
-    echo -e "${cyan} ~~~ [FORGE] ${colorless}$1"
+    printf "\e\033[0;34m ~~~ [FORGE]\033[0m %s\n" "$1"
 }

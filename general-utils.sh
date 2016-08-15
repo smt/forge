@@ -57,7 +57,7 @@ install_forge () {
     mkdir -p forge
     cp -Rn $forge_process/tasks forge
     touch .gitignore
-    echo "forge/tasks" >> .gitignore
+    printf "forge/tasks" >> .gitignore
     log "Project Setup Complete"
 }
 

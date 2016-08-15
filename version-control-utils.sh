@@ -36,7 +36,7 @@ enforce_version () {
 #   Cache key of the filepath with forward slashes replaced.
 ##
 get_cache_key () {
-    echo "${1//\//_}"
+    printf "%s" "${1//\//_}"
 }
 
 ##
