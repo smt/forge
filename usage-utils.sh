@@ -68,11 +68,13 @@ list_tasks () {
 #   None
 ##
 task_usage () {
-    local forge_task=$1
+    local task_help=$(sed '/@forge/,/@forge/!d;//d' $1)
 
-    echo ""
-    sed '/@forge/,/@forge/!d;//d' $forge_task
-    echo ""
+    if [[ -z $task_help ]]; then
+        error "Aborting: Unable to find @forge help docs for task ${1##*/}"
+    fi
+
+    echo -e "\n$task_help\n"
 }
 
 ##
