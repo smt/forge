@@ -70,6 +70,11 @@ version_control () {
     debug "filename: $filename"
     debug "temp_file: $temp_file"
 
+    if [ "$PERF" = true ]; then
+        log "Starting version_control for $filename"
+        local start_time=$(get_time)
+    fi
+
     # does cache exist?
     if [[ -f $temp_file ]]; then
         # are files different?
@@ -82,5 +87,10 @@ version_control () {
     else
         log "No cache for $filename: executing and caching"
         enforce_version $filepath $@
+    fi
+
+    if [ "$PERF" = true ]; then
+        local end_time=$(get_time)
+        log "version_control for $filename completed in $((end_time-start_time)) ms"
     fi
 }
