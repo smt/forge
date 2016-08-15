@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+
+##
+# Prints the current forge version
+#
+# Arguments:
+#   1. Forge process root directory
+#
+# Returns:
+#   None
+##
+forge_version () {
+    local forge_process=$1
+    echo "Forge v$(cat $forge_process/.forge-version)"
+}
+
+##
+# Print the usage for forge install
+#
+# Arguments:
+#   None
+#
+# Returns:
+#   None
+##
+install_usage () {
+    echo "
+        USAGE:
+            forge install
+
+        NOTES:
+            This will initialize a project with the .forge/ directory.
+            The directory this cmd is run in will be where .forge/ installs,
+            and it will be considered the root directory of the project.
+            The .forge/ directory will initialize with the example forge tasks.
+    "
+}
+
+##
+# List available forge tasks
+#
+# Arguments:
+#   None
+#
+# Returns:
+#   None
+##
+list_tasks () {
+    echo "
+    Forge Tasks:
+    "
+    for filepath in $FORGE_TASKS/*; do
+        t=${filepath##*/}
+        echo "        - $t"
+    done
+    echo ""
+}
+
+##
+# Print the usage for a specific task by searching
+# for multiline comments with @forge anotations
+# and printing the contents between them.
+#
+# Arguments:
+#   1. Task to get usage for
+#
+# Returns:
+#   None
+##
+task_usage () {
+    local forge_task=$1
+
+    echo ""
+    sed '/@forge/,/@forge/!d;//d' $forge_task
+    echo ""
+}
+
+##
+# Print forge usage
+#
+# Arguments:
+#   None
+#
+# Returns:
+#   None
+##
+usage () {
+    echo "
+        USAGE:
+            forge task options
+
+        SETUP A PROJECT:
+            Run \"forge install\" in the project root to initialize forge.
+
+        OPTIONS:
+            -d --debug      Enable debug mode
+            -h --help       Show help
+            -p --perf       Show timestamps
+            -t --tasks      List all tasks
+            -v --version    List the current forge version
+
+        NOTES:
+            The desired task name must be the first arg.
+            If no task is given, the default task will be used.
+
+            All options will be passed down to the invoked task.
+
+        EXAMPLES:
+            Run default task:
+                forge
+
+            List all tasks:
+                forge -t
+
+            Run a task:
+                forge task
+
+            Get help for a specific task:
+                forge task -h
+    "
+}

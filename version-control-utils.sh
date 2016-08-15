@@ -1,14 +1,43 @@
 #!/usr/bin/env bash
 
-#***********************************************#
+##
+# Enforce version control by executing the version control cmd,
+# and by caching a copy of the dependencies listing file for
+# future reference.
 #
-# File:
-#   version-control.sh
+# Arguments:
+#   1. Dependencies listing file i.e. "package.json"
+#   2. Cmd to execute to enforce dependencies are installed on the project i.e. "npm install"
 #
-# Purpose:
-#   forge's version-control api for a project
+# Returns:
+#   None
+##
+enforce_version () {
+    local filepath=$1; shift
+    $@
+
+    if [[ $? -eq 0 ]]; then
+        debug "Caching $filepath"
+        cp -f $filepath $FORGE_CACHE/$(get_cache_key $filepath)
+    else
+        error "Aborting: Unable to cache and execute $@"
+        exit 1
+    fi
+}
+
+##
+# Get the cache filename for files forge
+# has stored in its .cache directory.
 #
-#***********************************************#
+# Arguments:
+#   1. Absolute filepath
+#
+# Returns:
+#   Cache key of the filepath with forward slashes replaced.
+##
+get_cache_key () {
+    echo "${1//\//_}"
+}
 
 ##
 # Enforce version control for a package manager in a project.
@@ -54,43 +83,4 @@ version_control () {
         log "No cache for $filename: executing and caching"
         enforce_version $filepath $@
     fi
-}
-
-##
-# Enforce version control by executing the version control cmd,
-# and by caching a copy of the dependencies listing file for
-# future reference.
-#
-# Arguments:
-#   1. Dependencies listing file i.e. "package.json"
-#   2. Cmd to execute to enforce dependencies are installed on the project i.e. "npm install"
-#
-# Returns:
-#   None
-##
-enforce_version () {
-    local filepath=$1; shift
-    $@
-
-    if [[ $? -eq 0 ]]; then
-        debug "Caching $filepath"
-        cp -f $filepath $FORGE_CACHE/$(get_cache_key $filepath)
-    else
-        error "Aborting: Unable to cache and execute $@"
-        exit 1
-    fi
-}
-
-##
-# Get the cache filename for files forge
-# has stored in its .cache directory.
-#
-# Arguments:
-#   1. Absolute filepath
-#
-# Returns:
-#   Cache key of the filepath with forward slashes replaced.
-##
-get_cache_key () {
-    echo "${1//\//_}"
 }

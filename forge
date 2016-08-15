@@ -1,31 +1,84 @@
 #!/usr/bin/env bash
 
-#***********************************************#
+##
+# Forge executable
 #
-# File:
-#   forge
+# Arguments:
+#   1. Cmd line args
 #
-# Purpose:
-#   forge executable
-#
-#***********************************************#
-
+# Returns:
+#   None
+##
 main () {
     local path=$(ls -l $(which $0) | awk '{print $NF}')
-    readonly FORGE_PROCESS=${path%/*}
+    local forge_process=${path%/*}
 
-    source $FORGE_PROCESS/init-forge.sh
-    source $FORGE_PROCESS/find-project.sh
-    source $FORGE_PROCESS/config.sh
-    source $FORGE_PROCESS/utils.sh
-    source $FORGE_PROCESS/version-control.sh
-    source $FORGE_PROCESS/parse-cmd.sh
+    source $forge_process/find-project-utils.sh
+    source $forge_process/general-utils.sh
+    source $forge_process/log-utils.sh
+    source $forge_process/parse-cmd-utils.sh
+    source $forge_process/usage-utils.sh
+    source $forge_process/version-control-utils.sh
 
-    if [[ -f $FORGE_TASKS/$TASK ]]; then
-        run_task $TASK
+    local options=$(get_options $@)
+    local task=$(get_task $@)
+
+    readonly PROJECT_ROOT=$(find_project)
+    readonly FORGE_CACHE=$PROJECT_ROOT/forge/.cache
+    readonly FORGE_TASKS=$PROJECT_ROOT/forge/tasks
+    readonly DEBUG=$(has_opt "-d" $options) || $(has_opt "--debug" $options)
+    readonly PERF=$(has_opt "-p" $options) || $(has_opt "--perf" $options)
+
+    if [ "$DEBUG" = true ]; then
+        set -x
+    fi
+
+    if [ "$(has_opt "-h" $options)" = true ] || [ "$(has_opt "--help" $options)" = true ]; then
+        if [[ -n $task ]]; then
+            if [[ $task == "install" ]]; then
+                install_usage
+                exit
+            elif [[ -f $FORGE_TASKS/$task ]]; then
+                task_usage $FORGE_TASKS/$task
+                exit
+            elif [[ $PROJECT_ROOT == "/" ]]; then
+                error "Aborting: Unable to find a forge project"
+            else
+                error "Aborting: Unable to find help for task $task"
+            fi
+        else
+            usage
+            exit
+        fi
+    fi
+
+    if [ "$(has_opt "-v" $options)" = true ] || [ "$(has_opt "--version" $options)" = true ]; then
+        forge_version $forge_process
+        exit
+    fi
+
+    if [[ $task == "install" ]]; then
+        install_forge $forge_process
+        exit
+    fi
+
+    if [[ $PROJECT_ROOT == "/" ]]; then
+        error "Aborting: Unable to find a forge project"
+    fi
+
+    if [ "$(has_opt "-t" $options)" = true ] || [ "$(has_opt "--tasks" $options)" = true ]; then
+        list_tasks $FORGE_TASKS
+        exit
+    fi
+
+    if [[ -z $task ]]; then
+        task="default"
+    fi
+
+    if [[ -f $FORGE_TASKS/$task ]]; then
+        run_task $task $options
     else
-        error "Aborting: Task $TASK does not exist"
-        exit 1
+        error "Aborting: Task $task does not exist"
     fi
 }
 
