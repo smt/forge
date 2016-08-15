@@ -20,7 +20,7 @@ It's important to mention that Forge is not seeking to replace containerization 
 git clone git@github.com:quidmonkey/forge.git ~/.forge
 ```
 
-When the `install` executable is run, it creates a global `forge` cmd in `/usr/local/bin` for every developer to run on their machine. To setup forge for a project, `cd` in the project root and run `forge install`. This will create a `.forge/` directory within the project root. This `.forge/` directory contains a `tasks/` directory full of various executable scripts called tasks. These tasks can be written in any language by using a `/usr/bin/env` invocation, and they can do whatever the project requires. No longer does the project need to be chained to a specific toolchain e.g. `maven` or `gulp`. Instead, forge acts a proxy for these tasks, offering a simple interface that only needs to be learned once.
+When the `install` executable is run, it creates a global `forge` cmd in `/usr/local/bin` for every developer to run on their machine. To setup forge for a project, `cd` in the project root and run `forge install`. This will create a `forge/` directory within the project root. This `forge/` directory contains a `tasks/` directory full of various executable scripts called tasks. These tasks can be written in any language by using a `/usr/bin/env` invocation, and they can do whatever the project requires. No longer does the project need to be chained to a specific toolchain e.g. `maven` or `gulp`. Instead, forge acts a proxy for these tasks, offering a simple interface that only needs to be learned once.
 
 To run a forge task, run:
 ```shell
@@ -114,7 +114,7 @@ Example: `debug "Filename: $filename"`
 ### error
 
 ```shell
-error string
+error string error_code
 ```
 
 Throw an error by logging a string and terminating the script
@@ -292,32 +292,14 @@ Exert version control on a file by caching a copy of it and comparing the cached
 
 Example: `version_control "$PROJECT_ROOT/package.json" "npm install"`
 
-## Config
+## Globals
 
 These are the globally available values that are available within Forge:
 
 ```shell
-# Paths
 readonly PROJECT_ROOT               # the project root where forge is installed in
-readonly FORGE_ROOT                 # the .forge/ directory in the project root
 readonly FORGE_CACHE                # the forge cache directory
 readonly FORGE_TASKS                # the tasks directory
-
-# Colors
-readonly BLACK
-readonly CYAN
-readonly GREEN
-readonly NO_COLOR
-readonly PURPLE
-readonly RED
-readonly YELLOW
-
-# Vars
-readonly OPTIONS                    # cmd line options
-readonly PROJECT_NAME               # name of the project, defaults to forge
-readonly TASK                       # current forge task
-
-# Mutables
-DEBUG                               # debug mode flag
-PERF                                # performance mode flag
+readonly DEBUG                      # flag for debug mode
+readonly PERF                       # flag for performance mode
 ```
