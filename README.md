@@ -143,7 +143,7 @@ Gets the value for a cmd line option.
 **Returns**
 * The option's value
 
-Example: `local file=$(get_opt_val "--file" $@); printf $file # => file value i.e. /path/to/some_file`
+Example: `local file=$(get_opt_val "--file" $@); printf "%s" "$file" # => file value i.e. /path/to/some_file`
 
 ### get_time
 
@@ -176,7 +176,7 @@ Checks to see if an option exists.
 **Returns**
 * True, if the option exists; false, otherwise
 
-Example: `local has_file=$(has_opt "--file" $@); printf $has_file # => True`
+Example: `local has_file=$(has_opt "--file" $@); printf "%s" "$has_file" # => True`
 
 ### is_mac_os
 
@@ -192,7 +192,7 @@ Returns true, if the current OS is MacOS; false, otherwise.
 **Returns**
 * True, if the current OS is MacOS; false, otherwise
 
-Example: `[[ is_mac_os ]] && printf "Hello MacOS" # => "Hello MacOS"`
+Example: `[[ is_mac_os ]] && printf "%s" "Hello MacOS" # => "Hello MacOS"`
 
 ### list_tasks
 
