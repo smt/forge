@@ -192,7 +192,7 @@ Returns true, if the current OS is MacOS; false, otherwise.
 **Returns**
 * True, if the current OS is MacOS; false, otherwise
 
-Example: `[[ is_mac_os ]] && printf "%s" "Hello MacOS" # => "Hello MacOS"`
+Example: `[[ is_mac_os ]] && printf "Hello MacOS" # => "Hello MacOS"`
 
 ### list_tasks
 
