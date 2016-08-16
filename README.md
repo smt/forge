@@ -69,15 +69,36 @@ If `version_control` is used within a task that a developer runs all the time i.
 
 See the use of `version_control` in the default task and the `version_control.sh` file for more info.
 
+## Busting the Cache
+
+Sometimes you may want to bust your forge cache. You can do this by passing the `--cachebuster` option. If a filename or filepath is passed with the `--cachebuster` option, Forge will attempt to bust the cache for the given file. Forge creates cache keys based on filepath, so a filepath is preferred - the absolute filepath that is given to the `version_control` function for the file. If Forge can't match based on filepath or a filename it is given, then Forge will loop through each file in the cache and attempt to find a match. If a match is found, the file will be removed. If no match is found, Forge will error out. If no filename or filepath is given, Forge will bust the entire cache.
+
 ## Closing Remarks
 
-In a nutshell, Forge can be thought of as "the one command to rule them all." Some may argue that they prefer experienced developers to something so simple, but one wonders if they have had the experience of dealing with broken machines on a daily basis, or running a complex set of cmds as a project matures, or having to rewrite the toolchain because the project far out-scaled what was originally envisioned. Forge offers a single interface to gently introduce developers to the cmd line, while offering up the ability for experienced developers to go wild creating tasks and modify Forge to their heart's content (and please submit good ideas as pull requests!).
+Forge was created to be scalable and toolchain agnostic. It was written in Bash, because Bash is fast, Bash is flexible enough to run any script in any language, and because Bash is the original JavaScript, being ubiquitous. As most build tools are executed from a shell, it makes the most sense to write a task runner in Bash.
 
-Forge was created to be scalable and toolchain agnostic. It was written in Bash, because Bash is the original JavaScript, being ubiquitous; it is fast; and it allows the flexibility to run any script in any language.
+In a nutshell, Forge can be thought of as "the one command to rule them all." Some may argue that they prefer experienced developers to something so simple, but one wonders if they have had the experience of dealing with broken machines on a daily basis, or running a complex set of cmds as a project matures, or having to rewrite the toolchain because the project far out-scaled what was originally envisioned. Forge offers a single interface to gently introduce developers to the cmd line, while offering up the ability for experienced developers to go wild creating tasks and modify Forge to their heart's content (and please submit good ideas as pull requests!).
 
 Now go out, and Forge!
 
 ## Api
+
+### bust_cache
+```shell
+bust_cache filepath
+```
+
+Bust the forge cache. Takes an optional filename or filepath that is cached. If a filename or filepath is passed with the `--cachebuster` option, Forge will attempt to bust the cache for the given file. Forge creates cache keys based on filepath, so a filepath is preferred - the absolute filepath that is given to the `version_control` function for the file. If Forge can't match based on filepath or a filename it is given, then Forge will loop through each file in the cache and attempt to find a match. If a match is found, the file will be removed. If no match is found, Forge will error out. If no filename or filepath is given, Forge will bust the entire cache.
+
+This is the function that is run when the `--cachebuster` option is passed.
+
+**Arguments**
+* Optional: filename or filepath
+
+**Returns**
+* None
+
+Example: `bust_cache "package.json"`
 
 ### command_exists
 
@@ -121,7 +142,7 @@ Throw an error by logging a string and terminating the script
 
 **Arguments**
 * A string to log as an error
-* Exit code (Defaults to 1)
+* Optional: exit code (defaults to 1)
 
 **Returns**
 * None

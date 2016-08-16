@@ -71,6 +71,12 @@ main () {
         exit
     fi
 
+    if [ "$(has_opt "--cachebuster" $options)" = true ]; then
+        local file_cache_to_bust="$(get_opt_val "--cachebuster" $options)"
+        bust_cache $file_cache_to_bust
+        exit
+    fi
+
     if [[ -z $task ]]; then
         task="default"
     fi

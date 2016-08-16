@@ -98,6 +98,7 @@ usage () {
             -p --perf       Show timestamps
             -t --tasks      List all tasks
             -v --version    List the current forge version
+            --cachebuster   Bust the forge cache: takes an optional filepath to bust
 
         NOTES:
             The desired task name must be the first arg.
@@ -117,5 +118,11 @@ usage () {
 
             Get help for a specific task:
                 forge task -h
+
+            Bust the forge cache:
+                forge --cachebuster
+
+            Bust the forge cache for a specific file:
+                forge --cachebuster filepath
     \n"
 }

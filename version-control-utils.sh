@@ -1,6 +1,49 @@
 #!/usr/bin/env bash
 
 ##
+# Bust the forge cache. Will attempt to bust the
+# cache of a file if a filepath is passed in;
+# will bust the entire forge cache if no filepath
+# is passed in.
+#
+# Arguments:
+#   1. filepath to bust cache for
+#
+# Returns:
+#   None
+##
+bust_cache () {
+    if [[ $# -ne 0 ]]; then
+        local filepath=$1
+        local cached_file=$(get_cache_key $filepath)
+
+        if [[ -f $FORGE_CACHE/$cached_file ]]; then
+            log "Busting cache for $filepath"
+            rm -f $FORGE_CACHE/$cached_file
+        else
+            local has_file=false
+
+            for f in $FORGE_CACHE/*; do
+                if cmp --silent $f $filepath; then
+                    has_file=true
+                    break
+                fi
+            done
+
+            if [ "$has_file" = true ]; then
+                log "Busting cache for $f"
+                rm -f $FORGE_CACHE/$f
+            else
+                error "Aborting: Unable to find cache for $filepath"
+            fi
+        fi
+    else
+        log "Busting the Forge cache."
+        rm -Rf $FORGE_CACHE
+    fi
+}
+
+##
 # Enforce version control by executing the version control cmd,
 # and by caching a copy of the dependencies listing file for
 # future reference.
