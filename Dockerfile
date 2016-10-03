@@ -5,8 +5,8 @@ MAINTAINER quidmonkey <quidmonkey@gmail.com>
 # Bash function to alias forge command to run in Docker container:
 #     forge() {
 #         docker run -it --rm \
-#             -v $(pwd):/data
-#             --name forge
+#             -v $(pwd):/data \
+#             --name forge \
 #             quidmonkey/forge:latest "$@"
 #     }
 
