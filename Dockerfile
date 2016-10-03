@@ -6,6 +6,7 @@ MAINTAINER quidmonkey <quidmonkey@gmail.com>
 #     forge() {
 #         docker run -it --rm \
 #             -v $(pwd):/data
+#             --name forge
 #             quidmonkey/forge:latest "$@"
 #     }
 
